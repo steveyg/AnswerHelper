@@ -43,5 +43,5 @@ python main.py
 ```
 搜索你要的答案吧
 
-##运行截图
+## 运行截图
 ![](./res/img/run.jpeg)
