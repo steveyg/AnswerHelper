@@ -3,7 +3,7 @@
 
 >最近几天，“直播答题”已席卷互联网。《冲顶大会》题目的范围涉及很广，天文地理历史科学娱乐影视音乐诗歌礼仪等，每次活动共12道题，也难怪王思聪会挑衅地说“觉得自己很聪明可以来试试”，反正，规则就是10秒中之内未答题和答错题都将被淘汰，且无法角逐当期的奖金。
 
-![](./res/img/chongding.jpg)
+<img width="300px" src="https://github.com/steveyg/AnswerHelper/blob/master/res/img/chongding.jpg?raw=true"/>
 
 虽然通过邀请好友可以获得复活次数，但是毕竟复活很宝贵，而且每轮只能复活一次，如果复活之后打错会更加可以。那么怎么样才能够短时间内提升我们的准确率呢？
 
@@ -44,4 +44,4 @@ python main.py
 搜索你要的答案吧
 
 ## 运行截图
-![](./res/img/run.jpeg)
+<img width="550px" src="https://github.com/steveyg/AnswerHelper/blob/master/res/img/run.jpeg?raw=true"/>
