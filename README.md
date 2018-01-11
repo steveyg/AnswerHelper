@@ -8,7 +8,7 @@
 虽然通过邀请好友可以获得复活次数，但是毕竟复活很宝贵，而且每轮只能复活一次，如果复活之后答错会更加可惜。那么怎么样才能够短时间内提升我们的准确率呢？
 
 ## 原理说明
-1.手机进入冲顶大会app
+1.手机进入答题app
 
 2.Android可以通过adb截屏并拉取图片
 ```shell
@@ -26,6 +26,7 @@ iPhone可以通过WDA进行图片截取，或者通过通过AirPlay/QuickTime投
 通过后两种方式得出最终的推荐结果，如果后两种无法得出则可以选择打开网页
 
 ## 使用教程
+- 通过ocr进行识别，适用于所有答题类APP
 1.下载代码并安装python2.7环境
 
 2.安装百度ocr库
@@ -37,11 +38,27 @@ pip install baidu-aip
 
 4.在img_utils中选择你喜欢的获取图片的方式，并且调整截图区域
 
-5.在终端中运行
+5.修改config中的GET_TYPE为TYPE_IMG
+
+6.在终端中运行
 ```shell
 python main.py
 ```
-搜索你要的答案吧
+进行搜索
+
+- 通过api进行获取，适用于冲顶大会APP
+1.下载代码并安装python2.7环境
+
+2.修改config中的GET_TYPE为TYPE_NET_CHONGDING
+
+3.在每道题出现前运行
+```shell
+python main.py
+```
+比如在前一道题出现答案之后，就运行脚本，等待结果即可
 
 ## 运行截图
 <img width="550px" src="https://github.com/steveyg/AnswerHelper/blob/master/res/img/run.jpeg?raw=true"/>
+
+## 更新日志
+2018.01.11 增加了api访问方式，感谢[HuuBaa](https://github.com/HuuBaa)
