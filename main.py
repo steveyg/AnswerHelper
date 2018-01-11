@@ -5,27 +5,18 @@ import img_utils
 import json
 import solve_utils
 import config
+import problem_utils
 
+result = problem_utils.get_result()
+question = result[0]
+answer = result[1]
 
-#识别文字
-words = img_utils.spot()['words_result'];
-question = '';
-answer = [];
-flag = 1;
-
-#问题
-if len(words) == 4:
-    question = words[0]['words'];
-elif len(words) == 5:
-    question = words[0]['words'] + words[1]['words'];
-    flag = 2;
-question = question.replace("?","")
 print u"问题 ：" + question;
-
 #选项
-for i in range(flag,len(words)):
-    answer.append(words[i]['words'])
-    print u"选项" + str(i - flag + 1) + u" : " +answer[i - flag]
+for i in range(0,len(answer)):
+    print u"选项" + str(i + 1) + u" : " +answer[i]
+
+solve_utils.open_wabpage(question)
 
 #判断否定
 is_min = (question.find(u"不") != -1)
