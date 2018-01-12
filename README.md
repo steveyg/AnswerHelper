@@ -66,9 +66,14 @@ python main.py
 ## 更新日志
 2018.01.11 增加了api访问方式，感谢[HuuBaa](https://github.com/HuuBaa)
 
+## 常见问题
+
+详见[Q&A](https://github.com/steveyg/AnswerHelper/blob/master/Q%26A.md)
+
 ## 进行中
 1.尝试获取其他app接口
 
 2.简化切换不同方式的操作
 
+3.mac中有时打开浏览器会报错（中文异常）
 
