@@ -18,3 +18,12 @@ A：需要修改一下几个文件
 ## Q:提示cannot write mode RGBA as JPEG
 
 A: 修改config.py中的图片路径，把jpg改为png即可
+
+## Q:提示NO such file or directory :'img.jpg '
+
+A：图片路径指向错误，请讲config.py中的图片路径指向截图，或者排查是否截图没有生成
+
+## Q:提示No JSON Object could be decode
+
+A：出现这个说明已经成功运行，但是对于接口的异常没有进行处理，最新的代码已经修复这个缺陷，可以更新最新代码进行
+ 
