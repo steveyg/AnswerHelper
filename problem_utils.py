@@ -6,6 +6,7 @@ import json
 import solve_utils
 import config
 import requests
+import time
 
 def get_by_scan():
 	question = '';
@@ -37,6 +38,7 @@ def get_chongding_by_api():
 	api_url = 'http://htpmsg.jiecaojingxuan.com/msg/current'
 	req = requests.get(url=api_url)
 	while(json.loads(req.text)['msg']  != u"成功"):
+		time.sleep(0.5)
 		req = requests.get(url=api_url)
 	event = json.loads(req.text)['data']['event']
 	question = event['desc'];
