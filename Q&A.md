@@ -8,7 +8,7 @@ A：由于未安装百度ocr依赖导致找不到aip，通过pip install baidu-a
 
 A：使用PIL库进行图像处理，尝试安装PIL或pillow即可
 
-## 已经将手机投影至电脑中，如何切换OCR模式？
+## Q:已经将手机投影至电脑中，如何切换OCR模式？
 
 A：需要修改一下几个文件
 - 修改config.py中GET_TYPE的值为TYPE_IMG
@@ -26,4 +26,8 @@ A：图片路径指向错误，请讲config.py中的图片路径指向截图，�
 ## Q:提示No JSON Object could be decode
 
 A：出现这个说明已经成功运行，但是对于接口的异常没有进行处理，最新的代码已经修复这个缺陷，可以更新最新代码进行
- 
+
+## Q:如何选择不打开浏览器
+
+A: 设置config中的OPEN_BROWSER为False
+
