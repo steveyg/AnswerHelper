@@ -6,10 +6,16 @@ import sys
 import requests
 import re
 
+if sys.version_info.major == 2:
+    import urllib as ul
+elif sys.version_info.major == 3:
+    from urllib import parse as ul
+else:
+    raise RuntimeError('Unknown python version')
 
 # 直接用浏览器打开问题
 def open_wabpage(question):
-    webbrowser.open('https://baidu.com/s?wd=' + urllib.quote(question.encode(sys.stdout.encoding)))
+    webbrowser.open('https://baidu.com/s?wd=' + ul.quote(question.encode(sys.stdout.encoding)))
 
 
 # 根据问题搜索结果计算每个选项出现的次数
