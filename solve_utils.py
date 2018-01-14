@@ -1,13 +1,15 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import webbrowser
+import urllib
+import sys
 import requests
 import re
 
 
 # 直接用浏览器打开问题
 def open_wabpage(question):
-    webbrowser.open(u'https://baidu.com/s?wd=' + question)
+    webbrowser.open('https://baidu.com/s?wd=' + urllib.quote(question.encode(sys.stdout.encoding)))
 
 
 # 根据问题搜索结果计算每个选项出现的次数

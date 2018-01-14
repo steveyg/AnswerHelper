@@ -3,7 +3,6 @@
 
 import img_utils
 import json
-import solve_utils
 import config
 import requests
 import time

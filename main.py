@@ -1,10 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import img_utils
-import json
 import solve_utils
-import config
 import problem_utils
 
 question, answers = problem_utils.get_result()
@@ -40,5 +37,5 @@ else:
 if select1 == select2:
     print(u"推荐答案为 " + answers[select1])
 else:
-    print(u'推荐答案：%s  参考答案：%s' % (answers[select2], answers[select1])
-          if solve_utils.has_repeat(words_count, select1) > 1 else (answers[select1], answers[select2]))
+    print(u'推荐答案：%s  参考答案：%s' % ((answers[select2], answers[select1])
+          if solve_utils.has_repeat(words_count, select1) > 1 else (answers[select1], answers[select2])))
