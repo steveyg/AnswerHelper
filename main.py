@@ -3,6 +3,7 @@
 
 import solve_utils
 import problem_utils
+import config
 
 question, answers = problem_utils.get_result()
 
@@ -11,7 +12,8 @@ print(u"问题 ：" + question)
 for i in range(0, len(answers)):
     print(u"选项" + str(i + 1) + u" : " + answers[i])
 
-solve_utils.open_wabpage(question)
+if config.OPEN_BROWSER:
+    solve_utils.open_wabpage(question)
 
 # 判断否定
 is_opposite = (question.find(u"不") != -1)
