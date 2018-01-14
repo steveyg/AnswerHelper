@@ -3,6 +3,10 @@
 
 import solve_utils
 import problem_utils
+import config
+import time
+
+time_start = time.time()
 
 question, answers = problem_utils.get_result()
 
@@ -11,7 +15,8 @@ print(u"问题 ：" + question)
 for i in range(0, len(answers)):
     print(u"选项" + str(i + 1) + u" : " + answers[i])
 
-solve_utils.open_wabpage(question)
+if config.OPEN_BROWSER:
+    solve_utils.open_wabpage(question)
 
 # 判断否定
 is_opposite = (question.find(u"不") != -1)
@@ -39,3 +44,4 @@ if select1 == select2:
 else:
     print(u'推荐答案：%s  参考答案：%s' % ((answers[select2], answers[select1])
           if solve_utils.has_repeat(words_count, select1) > 1 else (answers[select1], answers[select2])))
+print(u'耗时：%s s' % (time.time() - time_start))

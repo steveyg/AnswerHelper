@@ -13,8 +13,14 @@ import os
 
 
 # 通过adb获取android图像
+# 因安卓系统版本的差异，adb shell screencap -p > filename 这种方式
+# 对于较旧的版本会产生损坏的文件（可做特殊处理）
+# 为了保持简便和兼容性，采用一般的方法。若版本较新可采用上面的方法
 def get_android_img():
-    os.system('adb shell screencap -p > ' + config.IMAGE_PAGE)
+    # Uncomment this line if you have a newer Android OS
+    # os.system('adb shell screencap -p > ' + config.IMAGE_PAGE)
+    os.system('adb shell screencap -p /sdcard/screenshot.png')
+    os.system('adb pull /sdcard/screenshot.png ' + config.IMAGE_PAGE)
     im = Image.open(config.IMAGE_PAGE)
     im = im.convert('RGB')
     im.save(config.IMAGE_PAGE)
@@ -38,7 +44,7 @@ def crop(img_path, box):
     img.close()
 
 
-def get_box_by_image(img_path):
+def get_box_by_image(img_path, upper_crop_factor):
     im = Image.open(img_path)
     pixels = im.load()
     w, h = im.size
@@ -60,8 +66,8 @@ def get_box_by_image(img_path):
             break
     if upper == -1 or upper == lower:
         raise ValueError('Cannot determine the box in the image')
-    # Cut down 24% of the box height
-    upper += 0.24 * (lower - upper)
+    # Cut down a small percent of the box height
+    upper += upper_crop_factor * (lower - upper)
     im.close()
     return 0, upper, w, lower
 
@@ -80,6 +86,6 @@ def spot():
         get_ios_img()
     else:
         raise ValueError('Unknown device type')
-    crop(config.IMAGE_PAGE, get_box_by_image(config.IMAGE_PAGE))
+    crop(config.IMAGE_PAGE, get_box_by_image(config.IMAGE_PAGE, config.GET_FACTOR))
     image = get_file_content(config.IMAGE_PAGE_TEMP)
     return client.basicGeneral(image)
