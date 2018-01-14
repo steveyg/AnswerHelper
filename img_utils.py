@@ -76,11 +76,10 @@ def get_file_content(filePath):
 def spot():
     if config.GET_DEVICE_TYPE == config.TYPE_ANDROID:
         get_android_img()
-        crop(config.IMAGE_PAGE, get_box_by_image(config.IMAGE_PAGE))
     elif config.GET_DEVICE_TYPE == config.TYPE_IOS:
         get_ios_img()
-        crop(config.IMAGE_PAGE, get_box_by_image(config.IMAGE_PAGE))
     else:
         raise ValueError('Unknown device type')
+    crop(config.IMAGE_PAGE, get_box_by_image(config.IMAGE_PAGE))
     image = get_file_content(config.IMAGE_PAGE_TEMP)
     return client.basicGeneral(image)
