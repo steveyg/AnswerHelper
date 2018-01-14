@@ -14,7 +14,7 @@ else:
     raise RuntimeError('Unknown python version')
 
 # 直接用浏览器打开问题
-def open_wabpage(question):
+def open_webpage(question):
     webbrowser.open('https://baidu.com/s?wd=' + ul.quote(question.encode(sys.stdout.encoding)))
 
 
