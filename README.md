@@ -75,6 +75,7 @@ python main.py
 
 2.简化切换不同方式的操作
 
-3.mac中有时打开浏览器会报错（中文异常）
+3.调研QA-snake的准确率
 
-4.调研QA-snake的准确率
+## 贡献者
+[koho](https://github.com/koho)
