@@ -4,6 +4,9 @@
 import solve_utils
 import problem_utils
 import config
+import time
+
+time_start = time.time()
 
 question, answers = problem_utils.get_result()
 
@@ -41,3 +44,4 @@ if select1 == select2:
 else:
     print(u'推荐答案：%s  参考答案：%s' % ((answers[select2], answers[select1])
           if solve_utils.has_repeat(words_count, select1) > 1 else (answers[select1], answers[select2])))
+print(u'耗时：%s s' % (time.time() - time_start))
