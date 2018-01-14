@@ -26,11 +26,17 @@ def get_android_img():
     im.save(config.IMAGE_PAGE)
 
 
-# 获取ios图像
+#  TODO WDA获取图像
 def get_ios_img():
     img = ImageGrab.grab()
     img.save(config.IMAGE_PAGE)
 
+
+#投影到桌面进行截图
+def get_pc_img(box):
+    img = ImageGrab.grab()
+    img = img.crop(box)
+    img.save(config.IMAGE_PAGE_TEMP)
 
 # 裁剪图像
 def crop(img_path, box):
@@ -80,12 +86,14 @@ def get_file_content(filePath):
 
 # 识别文字
 def spot():
-    if config.GET_DEVICE_TYPE == config.TYPE_ANDROID:
-        get_android_img()
-    elif config.GET_DEVICE_TYPE == config.TYPE_IOS:
-        get_ios_img()
+    if config.GET_DEVICE_TYPE == config.TYPE_PC:
+        get_pc_img((0, 300, 850, 1000))
     else:
-        raise ValueError('Unknown device type')
-    crop(config.IMAGE_PAGE, get_box_by_image(config.IMAGE_PAGE, config.GET_FACTOR))
+        if config.GET_DEVICE_TYPE == config.TYPE_ANDROID:
+                get_android_img()
+        elif config.GET_DEVICE_TYPE == config.TYPE_IOS:
+                get_ios_img()
+                raise ValueError('Unknown device type')
+        crop(config.IMAGE_PAGE, get_box_by_image(config.IMAGE_PAGE, config.GET_FACTOR))
     image = get_file_content(config.IMAGE_PAGE_TEMP)
     return client.basicGeneral(image)
