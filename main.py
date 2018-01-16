@@ -5,6 +5,7 @@ import solve_utils
 import problem_utils
 import config
 import time
+import re
 
 time_start = time.time()
 
@@ -20,6 +21,13 @@ if config.OPEN_BROWSER:
 
 # 判断否定
 is_opposite = (question.find(u"不") != -1)
+# 验证否定是否合法
+if is_opposite:
+    # 不字前后没有未闭合的双引号或者书名号
+    if re.match(u'^[^"《]*?((("[^"]+")|(《[^》]+》))[^"《]*)*不([^"》]*(("[^"]+")|(《[^》]+》)))*[^"》]*$',
+                re.sub(u'“|”', u'"', question)) is None:
+        is_opposite = False
+
 
 # 两种方式进行判断
 words_count = solve_utils.words_count(question, answers)
