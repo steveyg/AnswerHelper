@@ -77,7 +77,7 @@ python auto.py
 
 2018.01.11 增加了api访问方式，感谢[HuuBaa](https://github.com/HuuBaa)
 
-2918.01.17 增加了通过api自动获取题目和推荐答案，感谢[kingjh](https://github.com/kingjh)的建议
+2018.01.17 增加了通过api自动获取题目和推荐答案，感谢[kingjh](https://github.com/kingjh)的建议
 
 ## 常见问题
 
