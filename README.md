@@ -71,11 +71,11 @@ python main.py
 详见[Q&A](https://github.com/steveyg/AnswerHelper/blob/master/Q%26A.md)
 
 ## 进行中
-1.尝试获取其他app接口
+1.对words_result异常进行处理
 
 2.简化切换不同方式的操作
 
-3.调研QA-snake的准确率
+3.调研汪仔答题助手
 
 ## 贡献者
 [koho](https://github.com/koho)
