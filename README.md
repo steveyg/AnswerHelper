@@ -1,7 +1,10 @@
-# 《冲顶大会》答题辅助工具
+# 答题辅助工具
+
+>适用于冲顶大会、芝士超人、百万赢家、西瓜视频等
+
 ## 冲顶大会
 
->最近几天，“直播答题”已席卷互联网。《冲顶大会》题目的范围涉及很广，天文地理历史科学娱乐影视音乐诗歌礼仪等，每次活动共12道题，也难怪王思聪会挑衅地说“觉得自己很聪明可以来试试”，反正，规则就是10秒中之内未答题和答错题都将被淘汰，且无法角逐当期的奖金。
+最近几天，“直播答题”已席卷互联网。《冲顶大会》题目的范围涉及很广，天文地理历史科学娱乐影视音乐诗歌礼仪等，每次活动共12道题，也难怪王思聪会挑衅地说“觉得自己很聪明可以来试试”，反正，规则就是10秒中之内未答题和答错题都将被淘汰，且无法角逐当期的奖金。
 
 <img width="300px" src="https://github.com/steveyg/AnswerHelper/blob/master/res/img/chongding.jpg?raw=true"/>
 
@@ -48,23 +51,33 @@ python main.py
 ```
 进行搜索
 
-### 通过api进行获取，适用于冲顶大会APP（接口疑似失效，请先使用ocr方式）
+### 通过[搜狗](https://www.sogou.com/)api进行获取，适用于冲顶大会、芝士超人、百万赢家、西瓜视频
 
 1.下载代码并安装python2.7环境
 
-2.修改config中的GET_TYPE为TYPE_NET_CHONGDING
+2.修改config中的AUTO_URL_KEY为需要的类型
 
-3.在每道题出现前运行
+3.运行
 ```shell
-python main.py
+python auto.py
 ```
-比如在前一道题出现答案之后，就运行脚本，等待结果即可
+题目和答案会自动刷新
 
 ## 运行截图
+
+### ocr方式
+
 <img width="550px" src="https://github.com/steveyg/AnswerHelper/blob/master/res/img/run.jpeg?raw=true"/>
 
+### api方式
+
+<img width="550px" src="https://github.com/steveyg/AnswerHelper/blob/master/res/img/auto.png?raw=true"/>
+
 ## 更新日志
+
 2018.01.11 增加了api访问方式，感谢[HuuBaa](https://github.com/HuuBaa)
+
+2918.01.17 增加了通过api自动获取题目和推荐答案，感谢[kingjh](https://github.com/kingjh)的建议
 
 ## 常见问题
 
@@ -73,9 +86,13 @@ python main.py
 ## 进行中
 1.对words_result异常进行处理
 
-2.简化切换不同方式的操作
+2.调研tesseract
 
-3.调研汪仔答题助手
+3.整理说明文档（readme），分成多个文件
 
 ## 贡献者
 [koho](https://github.com/koho)
+
+## 注
+- 通过api获取的方式还需进一步进行测试，欢迎大家使用和测试~
+- 本工具仅供学习交流，请勿用户商业用途
