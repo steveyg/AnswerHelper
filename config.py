@@ -32,3 +32,19 @@ GET_FACTOR = FACTOR_CHONGDING
 
 # 默认是否打开浏览器
 OPEN_BROWSER = 0
+
+
+#搜狗搜索api
+#冲顶大会
+KEY_CHONGDING = 'cddh'
+#西瓜视频
+KEY_XIGUA = 'xigua'
+#百万赢家
+KEY_BAIWAN = 'huajiao'
+#芝士超人
+KEY_ZHISHI = 'zscr'
+
+#设置自动的类型
+AUTO_URL_KEY = KEY_CHONGDING
+
+AUTO_URL = 'http://140.143.49.31/api/ans2?key='+AUTO_URL_KEY+'&wdcallback=jQuery321007193239172920585_1516186783454&_=1516186784191'
