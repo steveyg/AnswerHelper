@@ -30,5 +30,16 @@ GET_TYPE = TYPE_IMG
 GET_DEVICE_TYPE = TYPE_PC
 GET_FACTOR = FACTOR_CHONGDING
 
+# 投屏参数配置
+# 投屏到桌面的截屏范围，(左，上，右，下)
+PC_CROP_BOX = (0, 300, 850, 1000)
+
+# 投屏到桌面的窗口标题
+# 若设置此参数，手动设置的截屏范围(PC_CROP_BOX)将被忽略
+# 仅支持 Windows，其他平台请勿设置
+PC_WINDOW_NAME = ''
+# 截图出现空白、黑屏可将其设为1
+PC_WINDOW_FALLBACK = 1
+
 # 默认是否打开浏览器
 OPEN_BROWSER = 0
