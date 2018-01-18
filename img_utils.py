@@ -6,21 +6,18 @@ from PIL import ImageGrab
 import config
 from PIL import Image
 import numpy as np
+import os
+import sys
+import subprocess
 import matplotlib.pyplot as plt
 
 client = AipOcr(config.APP_ID, config.API_KEY, config.SECRET_KEY)
-import os
 
 
 # 通过adb获取android图像
-# 因安卓系统版本的差异，adb shell screencap -p > filename 这种方式
-# 对于较旧的版本会产生损坏的文件（可做特殊处理）
-# 为了保持简便和兼容性，采用一般的方法。若版本较新可采用上面的方法
 def get_android_img():
-    # Uncomment this line if you have a newer Android OS
-    # os.system('adb shell screencap -p > ' + config.IMAGE_PAGE)
-    os.system('adb shell screencap -p /sdcard/screenshot.png')
-    os.system('adb pull /sdcard/screenshot.png ' + config.IMAGE_PAGE)
+    os.system('adb shell screencap -p /sdcard/screen.png')
+    os.system('adb pull /sdcard/screen.png ' + config.IMAGE_PAGE)
     im = Image.open(config.IMAGE_PAGE)
     im = im.convert('RGB')
     im.save(config.IMAGE_PAGE)
@@ -32,11 +29,25 @@ def get_ios_img():
     img.save(config.IMAGE_PAGE)
 
 
-#投影到桌面进行截图
-def get_pc_img(box):
-    img = ImageGrab.grab()
-    img = img.crop(box)
-    img.save(config.IMAGE_PAGE_TEMP)
+# 投影到桌面进行截图
+def get_pc_img(window_name, box):
+    if window_name:
+        assert sys.platform == 'win32', 'Platform is not Windows'
+        command = ['windowcap.exe', window_name]
+        if not config.PC_WINDOW_FALLBACK:
+            command.append(config.IMAGE_PAGE)
+        output = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE).stdout.read()
+        if output:
+            if output.startswith('('):
+                img = ImageGrab.grab(eval(output))
+                img.save(config.IMAGE_PAGE)
+            else:
+                raise ValueError(output)
+        crop(config.IMAGE_PAGE, get_box_by_image(config.IMAGE_PAGE, config.GET_FACTOR))
+    else:
+        img = ImageGrab.grab(box)
+        img.save(config.IMAGE_PAGE_TEMP)
+
 
 # 裁剪图像
 def crop(img_path, box):
@@ -87,13 +98,14 @@ def get_file_content(filePath):
 # 识别文字
 def spot():
     if config.GET_DEVICE_TYPE == config.TYPE_PC:
-        get_pc_img((0, 300, 850, 1000))
+        get_pc_img(config.PC_WINDOW_NAME, config.PC_CROP_BOX)
     else:
         if config.GET_DEVICE_TYPE == config.TYPE_ANDROID:
-                get_android_img()
+            get_android_img()
         elif config.GET_DEVICE_TYPE == config.TYPE_IOS:
-                get_ios_img()
-                raise ValueError('Unknown device type')
+            get_ios_img()
+        else:
+            raise ValueError('Unknown device type')
         crop(config.IMAGE_PAGE, get_box_by_image(config.IMAGE_PAGE, config.GET_FACTOR))
     image = get_file_content(config.IMAGE_PAGE_TEMP)
     return client.basicGeneral(image)
