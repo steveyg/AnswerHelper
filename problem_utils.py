@@ -14,7 +14,7 @@ def get_by_scan():
     # 识别文字
     result = img_utils.spot()
     if 'words_result' not in result:
-        raise ValueError('文字识别出现错误')
+        raise ValueError('文字识别出现错误: ' + result.get('error_msg', '未知错误').encode('utf-8'))
     words = result['words_result']
     question_line = True
     for line in words:
