@@ -12,6 +12,9 @@ time_start = time.time()
 question, answers = problem_utils.get_result()
 
 print(u"问题 ：" + question)
+if not answers:
+    raise ValueError('未能识别出答案选项')
+
 # 选项
 for i in range(0, len(answers)):
     print(u"选项" + str(i + 1) + u" : " + answers[i])
