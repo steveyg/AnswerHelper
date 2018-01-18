@@ -9,6 +9,7 @@ import numpy as np
 import os
 import sys
 import subprocess
+import locale
 import matplotlib.pyplot as plt
 
 client = AipOcr(config.APP_ID, config.API_KEY, config.SECRET_KEY)
@@ -33,7 +34,7 @@ def get_ios_img():
 def get_pc_img(window_name, box):
     if window_name:
         assert sys.platform == 'win32', 'Platform is not Windows'
-        command = ['windowcap.exe', window_name]
+        command = ['windowcap.exe', window_name.encode(locale.getdefaultlocale()[1])]
         if not config.PC_WINDOW_FALLBACK:
             command.append(config.IMAGE_PAGE)
         output = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE).stdout.read()

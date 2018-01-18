@@ -37,7 +37,7 @@ PC_CROP_BOX = (0, 300, 850, 1000)
 # 投屏到桌面的窗口标题
 # 若设置此参数，手动设置的截屏范围(PC_CROP_BOX)将被忽略
 # 仅支持 Windows，其他平台请勿设置
-PC_WINDOW_NAME = ''
+PC_WINDOW_NAME = u''
 # 截图出现空白、黑屏可将其设为1
 PC_WINDOW_FALLBACK = 1
 
