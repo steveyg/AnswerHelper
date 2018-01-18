@@ -6,6 +6,7 @@ import problem_utils
 import config
 import time
 import re
+from sys import stdout
 
 time_start = time.time()
 
@@ -13,7 +14,7 @@ question, answers = problem_utils.get_result()
 
 print(u"问题 ：" + question)
 if not answers:
-    raise ValueError('未能识别出答案选项')
+    raise ValueError(u'未能识别出答案选项'.encode(stdout.encoding))
 
 # 选项
 for i in range(0, len(answers)):
