@@ -83,7 +83,7 @@ def get_box_by_image(img_path, upper_crop_factor):
             lower = y
             break
     if upper == -1 or upper == lower:
-        raise ValueError('Cannot determine the box in the image')
+        raise ValueError('不能确定图片上的答题区域')
     # Cut down a small percent of the box height
     upper += upper_crop_factor * (lower - upper)
     im.close()

@@ -12,7 +12,10 @@ def get_by_scan():
     question = u''
     answers = []
     # 识别文字
-    words = img_utils.spot()['words_result']
+    result = img_utils.spot()
+    if 'words_result' not in result:
+        raise ValueError('文字识别出现错误')
+    words = result['words_result']
     question_line = True
     for line in words:
         if question_line:
