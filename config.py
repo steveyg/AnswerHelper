@@ -34,16 +34,15 @@ GET_FACTOR = FACTOR_CHONGDING
 # 投屏到桌面的截屏范围，(左，上，右，下)
 PC_CROP_BOX = (0, 300, 850, 1000)
 
-# 投屏到桌面的窗口标题
-# 若设置此参数，手动设置的截屏范围(PC_CROP_BOX)将被忽略
-# 仅支持 Windows，其他平台请勿设置
-PC_WINDOW_NAME = u''
-# 截图出现空白、黑屏可将其设为1
-PC_WINDOW_FALLBACK = 1
+# 是否使用Windows投屏窗口化截图
+# 若使用，设为1，手动设置的截屏范围将被忽略
+# 仅支持 Windows，其他平台请保持该值为0
+PC_USE_WINDOW_CAPTURE = 0
+
+PC_WINDOW_CONFIG = 'window.ini'
 
 # 默认是否打开浏览器
 OPEN_BROWSER = 0
-
 
 #搜狗搜索api
 #冲顶大会
