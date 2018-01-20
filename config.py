@@ -39,6 +39,8 @@ PC_CROP_BOX = (0, 300, 850, 1000)
 # 仅支持 Windows，其他平台请保持该值为0
 PC_USE_WINDOW_CAPTURE = 0
 
+# 是否使用兼容模式
+PC_WINDOW_FALLBACK = 0
 PC_WINDOW_CONFIG = 'window.ini'
 
 # 默认是否打开浏览器
