@@ -61,7 +61,7 @@ def get_box_by_image(img_path, upper_crop_factor):
     for y in range(h):
         white_pixel_count = 0
         for x in range(w):
-            if all([c == 255 or c == 254 for c in pixels[x, y]]):
+            if all([c > 240 for c in pixels[x, y]]):
                 white_pixel_count += 1
         if white_pixel_count >= int(0.8 * w):
             upper = y
@@ -70,7 +70,7 @@ def get_box_by_image(img_path, upper_crop_factor):
     for y in range(h - 1, -1, -1):
         white_pixel_count = 0
         for x in range(w):
-            if all([c == 255 or c == 254 for c in pixels[x, y]]):
+            if all([c > 240 for c in pixels[x, y]]):
                 white_pixel_count += 1
         if white_pixel_count >= int(0.8 * w):
             lower = y
