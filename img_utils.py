@@ -7,6 +7,7 @@ import config
 from PIL import Image
 import os
 import sys
+import subprocess
 
 client = AipOcr(config.APP_ID, config.API_KEY, config.SECRET_KEY)
 
@@ -30,8 +31,16 @@ def get_ios_img():
 def get_pc_img(window_cap, box):
     if window_cap:
         assert sys.platform == 'win32', 'Platform is not Windows'
-        if os.system(' '.join(('windowcap.exe', config.PC_WINDOW_CONFIG, config.IMAGE_PAGE))) != 0:
-            raise ValueError('Cannot find target window')
+        command = ['windowcap.exe', config.PC_WINDOW_CONFIG]
+        if not config.PC_WINDOW_FALLBACK:
+            command.append(config.IMAGE_PAGE)
+        output = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE).stdout.read()
+        if output:
+            if output.startswith('('):
+                img = ImageGrab.grab(eval(output))
+                img.save(config.IMAGE_PAGE)
+            else:
+                raise ValueError(output)
         crop(config.IMAGE_PAGE, get_box_by_image(config.IMAGE_PAGE, config.GET_FACTOR))
     else:
         img = ImageGrab.grab(box)
