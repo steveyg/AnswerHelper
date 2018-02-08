@@ -75,9 +75,11 @@ python auto.py
 
 ## 更新日志
 
-2018.01.11 增加了api访问方式，感谢[HuuBaa](https://github.com/HuuBaa)
+2018.01.11 增加了api访问方式，感谢[HuuBaa](https://github.com/HuuBaa)提供的接口
 
 2018.01.17 增加了通过api自动获取题目和推荐答案，感谢[kingjh](https://github.com/kingjh)的建议
+
+2018.01.18 增加windows下直接获取窗口进行截图，感谢[koho](https://github.com/koho)
 
 ## 常见问题
 

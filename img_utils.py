@@ -5,11 +5,9 @@ from aip import AipOcr
 from PIL import ImageGrab
 import config
 from PIL import Image
-import numpy as np
 import os
 import sys
 import subprocess
-import matplotlib.pyplot as plt
 
 client = AipOcr(config.APP_ID, config.API_KEY, config.SECRET_KEY)
 
@@ -30,10 +28,10 @@ def get_ios_img():
 
 
 # 投影到桌面进行截图
-def get_pc_img(window_name, box):
-    if window_name:
+def get_pc_img(window_cap, box):
+    if window_cap:
         assert sys.platform == 'win32', 'Platform is not Windows'
-        command = ['windowcap.exe', window_name]
+        command = ['windowcap.exe', config.PC_WINDOW_CONFIG]
         if not config.PC_WINDOW_FALLBACK:
             command.append(config.IMAGE_PAGE)
         output = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE).stdout.read()
@@ -66,23 +64,29 @@ def get_box_by_image(img_path, upper_crop_factor):
     pixels = im.load()
     w, h = im.size
     # Count the number of white pixels at the y-axis
-    white_pixel_count_y = np.zeros(h, dtype='int')
-    for y in range(h):
-        for x in range(w):
-            if all([c == 255 or c == 254 for c in pixels[x, y]]):
-                white_pixel_count_y[y] += 1
-    upper = lower = -1
     # Find the index and last index of pixel count which is greater than or equal to 80% of the screen width
-    for y, y_count in enumerate(white_pixel_count_y):
-        if y_count >= int(0.8 * w):
+    upper = lower = -1
+    # From top to bottom
+    for y in range(h):
+        white_pixel_count = 0
+        for x in range(w):
+            if all([c > 240 for c in pixels[x, y]]):
+                white_pixel_count += 1
+        if white_pixel_count >= int(0.8 * w):
             upper = y
             break
+    # From bottom to top
     for y in range(h - 1, -1, -1):
-        if white_pixel_count_y[y] >= int(0.8 * w):
+        white_pixel_count = 0
+        for x in range(w):
+            if all([c > 240 for c in pixels[x, y]]):
+                white_pixel_count += 1
+        if white_pixel_count >= int(0.8 * w):
             lower = y
             break
+
     if upper == -1 or upper == lower:
-        raise ValueError('Cannot determine the box in the image')
+        raise ValueError(u'不能确定图片上的答题区域'.encode(sys.stdout.encoding))
     # Cut down a small percent of the box height
     upper += upper_crop_factor * (lower - upper)
     im.close()
@@ -98,7 +102,7 @@ def get_file_content(filePath):
 # 识别文字
 def spot():
     if config.GET_DEVICE_TYPE == config.TYPE_PC:
-        get_pc_img(config.PC_WINDOW_NAME, config.PC_CROP_BOX)
+        get_pc_img(config.PC_USE_WINDOW_CAPTURE, config.PC_CROP_BOX)
     else:
         if config.GET_DEVICE_TYPE == config.TYPE_ANDROID:
             get_android_img()
