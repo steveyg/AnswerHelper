@@ -54,8 +54,10 @@ KEY_XIGUA = 'xigua'
 KEY_BAIWAN = 'huajiao'
 #芝士超人
 KEY_ZHISHI = 'zscr'
+#黄金十秒
+KEY_HUANGJIN = 'hjsm'
 
 #设置自动的类型
 AUTO_URL_KEY = KEY_CHONGDING
 
-AUTO_URL = 'http://140.143.49.31/api/ans2?key='+AUTO_URL_KEY+'&wdcallback=jQuery321007193239172920585_1516186783454&_=1516186784191'
+AUTO_URL = 'https://wdpush.sogoucdn.com/api/anspush?key='+AUTO_URL_KEY+'&wdcallback=jQuery200012885665125213563_1518087319437&_=1518087319438'
